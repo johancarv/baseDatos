@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <script src="jquery-3.2.1.min.js" type="text/javascript"></script> 
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+
+
+
+
+            (function () {
+                var elec = new Array();
+                var trans = new Array();
+                var total = new Array();
+                var num = 0;
+
+                var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+                $.getJSON(flickerAPI, {
+                    tags: "mount rainier",
+                    tagmode: "any",
+                    format: "json"
+                })
+                        .done(function (data) {
+
+                            $.each(data.items, function (i, item) {
+
+
+                                $("<img>").attr("src", item.media.m).appendTo("#images");
+                                elec[i] = i * 1.5;
+                                trans[i] = i * 2;
+                                num = i + 1;
+                            });
+                            
+                            drawLogScales(elec, trans, num);
+                        });
+            }
+
+
+            )();
+
+            google.charts.load('current', {packages: ['corechart', 'line']});
+
+            function drawLogScales(elec, trans, num) {
+
+                var data = new google.visualization.DataTable();
+                data.addColumn('number', 'General');
+                data.addColumn('number', 'Electronica');
+                data.addColumn('number', 'Transporte');
+                data.addColumn('number', 'General');
+
+                data.addRows(num);
+
+                for (var i = 0; i < num; i++) {
+
+
+                    data.setCell(i, 0, i);
+                    data.setCell(i, 1, elec[i]);
+                    data.setCell(i, 2, trans[i]);
+                    data.setCell(i, 3, trans[i]+elec[i]);
+
+                }
+
+                var options = {
+                    hAxis: {
+                        title: 'Dias en la api',
+                        logScale: true
+                    },
+                    vAxis: {
+                        title: 'Co2',
+                        logScale: false
+                    },
+                    colors: ['#a52714', '#0000FF','#333']
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    </body>
+</html>

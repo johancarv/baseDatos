@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.2.1.min.js" type="text/javascript"></script> 
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+    </head>
+    <body>
+        <script>
+
+            (function () {
+                var veh = 0;
+                var elec = 0;
+
+
+                var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+                $.getJSON(flickerAPI, {
+                    tags: "mount rainier",
+                    tagmode: "any",
+                    format: "json"
+                })
+                        .done(function (data) {
+
+                            $.each(data.items, function (i, item) {
+
+                                $("<img>").attr("src", item.media.m).appendTo("#images");
+                                veh++;
+                                elec += 2;
+                            });
+                            drawChart(veh, elec);
+                        });
+            }
+
+
+            )();
+
+            google.charts.load('current', {'packages': ['corechart']});
+
+
+            // Set a callback to run when the Google Visualization API is loaded.
+            // google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart(v, e) {
+
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topping');
+                data.addColumn('number', 'Slices');
+                data.addRows([
+                    ['Electrodomesticos (kg)', v],
+                    ['Transporte (kg)', e],
+                ]);
+
+                // Set chart options
+                var options = {'title': '% CO2 EN UN AÑO',
+                    'width': 800,
+                    'height': 700};
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
+        <!--Div that will hold the pie chart-->
+        <div id="chart_div"></div>
+
+    </body>
+</html>
