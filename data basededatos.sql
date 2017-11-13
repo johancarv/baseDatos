@@ -1259,4 +1259,11 @@ VALUES
 'descripcion',
 'fuente');
 
+/*Asignaciones*/
+INSERT INTO `huella_carbono`.`asignacion` (`num_recomendacion`, `cod_usuario`, `estado`, `fecha`) VALUES ('1', '1007', 'activa', '2017-03-10');
+INSERT INTO `huella_carbono`.`asignacion` (`num_recomendacion`, `cod_usuario`, `estado`, `fecha`) VALUES ('2', '1007', 'activa', '2017-04-01');
+INSERT INTO `huella_carbono`.`asignacion` (`num_recomendacion`, `cod_usuario`, `estado`, `fecha`) VALUES ('2', '1010', 'activa', '2017-11-13');
+INSERT INTO `huella_carbono`.`asignacion` (`num_recomendacion`, `cod_usuario`, `estado`, `fecha`) VALUES ('3', '1007', 'activa', '2017-04-01');
+INSERT INTO `huella_carbono`.`asignacion` (`num_recomendacion`, `cod_usuario`, `estado`, `fecha`) VALUES ('4', '1009', 'activa', '2017-12-03');
+INSERT INTO `huella_carbono`.`asignacion` (`num_recomendacion`, `cod_usuario`, `estado`, `fecha`) VALUES ('8', '1002', 'activa', '2017-02-03');
 
