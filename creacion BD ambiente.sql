@@ -115,9 +115,9 @@ PRIMARY KEY (`num`));
 
 
 CREATE TABLE `huella_carbono`.`asignacion` (  
-`num_recomendacion` INT NOT NULL auto_increment,  
+`num_recomendacion` INT NOT NULL,  
 `cod_usuario` VARCHAR(20) NOT NULL,  
-`estado` DOUBLE NOT NULL,
+`estado` VARCHAR(20) NOT NULL,
 `fecha` DATE NOT NULL,
 PRIMARY KEY (`num_recomendacion`,`cod_usuario`),
 FOREIGN KEY (`num_recomendacion`) 
